@@ -83,8 +83,8 @@ class VideoMaterial extends Material {
       
       float hmax = 140.0 / 360.0;
       float hmin = 100.0 / 360.0;
-      float smin = 20.0 / 100.0;
-      float vmin = 20.0 / 100.0;
+      float smin = 70.0 / 100.0;
+      float vmin = 70.0 / 100.0;
 
       if (hsv.x < hmax && hsv.x > hmin && hsv.y > smin && hsv.z > vmin) {
         return vec4(0.0, 0.0, 0.0, 0.0);
