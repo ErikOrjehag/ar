@@ -34,7 +34,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
   <body>
     <header>
       <details open>
-        <summary>Hit Test</summary>
+        <summary>ASD</summary>
         <p>
           This sample demonstrates use of hit testing to place virtual objects on real-world surfaces.
           <a class="back" href="./">Back</a>
@@ -73,8 +73,9 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
       let video = document.createElement('video');
       video.loop = true;
-      //video.src = 'media/video/bbb-sunflower-540p2-1min.webm';
-      video.src = 'media/video/simon-flying-masked.mp4';
+      video.disablePictureInPicture = true;
+      video.playsInline = true;
+      video.src = 'media/video/crew-mask.mp4';
 
       let videoNode = new VideoNodeMasked({video: video});
       videoNode.scale = [2.1, 1.1, 1.0];
