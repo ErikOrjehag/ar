@@ -68,8 +68,8 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       arObject.visible = false;
       scene.addNode(arObject);
 
-      //let flower = new Gltf2Node({url: 'media/gltf/sunflower/sunflower.gltf'});
-      //arObject.addNode(flower);
+      let flower = new Gltf2Node({url: 'media/gltf/sunflower/sunflower.gltf'});
+      arObject.addNode(flower);
 
       let video = document.createElement('video');
       video.loop = true;
@@ -78,19 +78,19 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       video.src = 'media/video/crew-mask.mp4';
 
       let videoNode = new VideoNodeMasked({video: video});
-      videoNode.scale = [2.1, 1.1, 1.0];
+      videoNode.scale = [1.0, 1.0, 1.0];
       arObject.addNode(videoNode);
 
       video.addEventListener('loadeddata', () => {
         // Once the video has loaded up adjust the aspect ratio of the "screen"
         // to fit the video's native shape.
-        let aspect = videoNode.aspectRatio;
-        console.log("LOADED VIDEO!", aspect);
-        if (aspect < 1.0) {
-          videoNode.scale = [aspect * 2.1, 1.1, 1.0];
-        } else {
-          videoNode.scale = [2.1, 1.1 / aspect, 1.0];
-        }
+        let width = video.videoWidth;
+        let height = video.videoHeight;
+        let aspect = (width / 2.0) / height;
+
+        console.log("LOADED VIDEO!", width, height, aspect);
+
+        videoNode.scale[0] *= aspect;
       });
 
       let reticle = new Gltf2Node({url: 'media/gltf/reticle/reticle.gltf'});
