@@ -86,8 +86,6 @@ export function createWebGLContext(glAttribs) {
   glAttribs = glAttribs || {alpha: false};
 
   let webglCanvas = document.createElement('canvas');
-  webglCanvas.width = 500;
-  webglCanvas.height = 500;
   let contextTypes = glAttribs.webgl2 ? ['webgl2'] : ['webgl', 'experimental-webgl'];
   let context = null;
 

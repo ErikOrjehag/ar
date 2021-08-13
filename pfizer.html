@@ -29,15 +29,14 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <link rel='icon' type='image/png' sizes='96x96' href='favicon-96x96.png'>
     <link rel='stylesheet' href='css/common.css'>
 
-    <title>Hit Test</title>
+    <title>Pfizer AR</title>
   </head>
   <body>
     <header>
       <details open>
-        <summary>ASD</summary>
+        <summary>Pfizer virtual greeting</summary>
         <p>
-          This sample demonstrates use of hit testing to place virtual objects on real-world surfaces.
-          <a class="back" href="./">Back</a>
+          Write something nice here...
         </p>
       </details>
     </header>
@@ -47,7 +46,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       import {Renderer, createWebGLContext} from './js/render/core/renderer.js';
       import {Node} from './js/render/core/node.js';
       import {Gltf2Node} from './js/render/nodes/gltf2.js';
-      import {VideoNodeMasked} from './js/render/nodes/video-masked.js';
+      import {VideoNodeMasked} from './js/render/nodes/video-masked.js?asd=123';
       import {DropShadowNode} from './js/render/nodes/drop-shadow.js';
       import {vec3, mat4} from './js/render/math/gl-matrix.js';
       import {Ray} from './js/render/math/ray.js';
@@ -68,8 +67,8 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       arObject.visible = false;
       scene.addNode(arObject);
 
-      let flower = new Gltf2Node({url: 'media/gltf/sunflower/sunflower.gltf'});
-      arObject.addNode(flower);
+      //let flower = new Gltf2Node({url: 'media/gltf/sunflower/sunflower.gltf'});
+      //arObject.addNode(flower);
 
       let video = document.createElement('video');
       video.loop = true;
@@ -77,8 +76,10 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       video.playsInline = true;
       video.src = 'media/video/crew-mask.mp4';
 
+      const videoScale = 0.8;
+
       let videoNode = new VideoNodeMasked({video: video});
-      videoNode.scale = [1.0, 1.0, 1.0];
+      videoNode.scale = [videoScale, videoScale, 1.0];
       arObject.addNode(videoNode);
 
       video.addEventListener('loadeddata', () => {
@@ -101,6 +102,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       // it in the world without adding much complexity.
       /*let shadow = new DropShadowNode();
       vec3.set(shadow.scale, 0.15, 0.15, 0.15);
+      vec3.set(shadow.translation, 0.0, 0.0, 1.0);
       arObject.addNode(shadow);*/
 
       const MAX_FLOWERS = 1;
@@ -143,6 +145,15 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
           gl = createWebGLContext({
             xrCompatible: true
           });
+          const width = window.innerWidth && document.documentElement.clientWidth ? 
+            Math.min(window.innerWidth, document.documentElement.clientWidth) : 
+            window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
+          const height = window.innerHeight && document.documentElement.clientHeight ? 
+            Math.min(window.innerHeight, document.documentElement.clientHeight) : 
+            window.innerHeight || document.documentElement.clientHeight || document.getElementsByTagName('body')[0].clientHeight;
+          
+          gl.canvas.width = width;
+          gl.canvas.height = height;
 
           renderer = new Renderer(gl);
 
@@ -184,7 +195,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       function addARObjectAt(matrix) {
 
         let newMatrix = mat4.create();
-        mat4.translate(newMatrix, matrix, vec3.fromValues(0.0, 0.5, 0.0));
+        mat4.translate(newMatrix, matrix, vec3.fromValues(0.0, videoScale, 0.0));
 
         console.log(matrix, newMatrix);
 

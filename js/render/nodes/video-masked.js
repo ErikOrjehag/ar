@@ -68,10 +68,6 @@ class VideoMaterial extends Material {
     vec4 fragment_main() {
       vec4 sample = texture2D(diffuse, vTexCoord / vec2(2.0, 1.0));
       float alpha = texture2D(diffuse, vTexCoord / vec2(2.0, 1.0) + vec2(0.5, 0.0)).r;
-      //return vec4(sample.r, sample.g, sample.b, alpha);
-      if (alpha < 0.1) {
-        alpha = 0.1;
-      }
       return vec4(sample.r, sample.g, sample.b, alpha);
     }
     `;
