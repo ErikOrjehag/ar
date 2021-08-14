@@ -33,12 +33,14 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
   </head>
   <body>
     <header>
-      <details open>
-        <summary>Pfizer virtual greeting</summary>
+      <div class="details" open>
+        <summary>Pfizer Oncology AR Greeting</summary>
         <p>
-          Write something nice here...
+          Welcome to this Augmented Reality (AR) experience. Make sure to stand in a well lit room with some free floor space. Press the button below to start the AR experience. Press “allow” when permission to use the camera is requested.
+          <br /><br />
+          You will then see your camera view on you  phone. Move your phone around in sweeping motions until you can see a blue circle on the floor. Move the blue circle until you can see the entire blue rectangle and then tap the screen to start the video.
         </p>
-      </details>
+      </div>
     </header>
     <script type="module">
       import {WebXRButton} from './js/util/webxr-button.js';
@@ -184,6 +186,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         xrHitTestSource.cancel();
         xrHitTestSource = null;
         session.end();
+        video.stop();
       }
 
       function onSessionEnded(event) {
@@ -201,7 +204,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
         let newFlower = arObject.clone();
         newFlower.visible = true;
-        newFlower.matrix = newMatrix;
+        newFlower.matrix = matrix;
         scene.addNode(newFlower);
 
         flowers.push(newFlower);

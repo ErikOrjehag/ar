@@ -82,7 +82,7 @@
     <!--[if lt IE 9]>
     <script src='https://html5shiv.googlecode.com/svn/trunk/html5.js'></script>
     <![endif]-->
-    <title>WebXR - Samples</title>
+    <title>Around the Corner</title>
   </head>
   <body>
 
@@ -107,7 +107,6 @@
           let canhazElement = document.getElementById('canhazwebxr');
           let canhazImg = document.getElementById('canhazimg');
           if ('xr' in navigator) {
-            canhazElement.innerText = "Your browser implements the WebXR API and may be able to run Virtual Reality or Augmented Reality experiences if you are using a supported OS and the appropriate hardware."
             navigator.xr.isSessionSupported('immersive-vr').then((supported) => {
               const span = document.createElement('span');
               span.innerText = supported ? '✔️- VR support detected' : '❌ - VR support not detected';
@@ -122,13 +121,13 @@
             });
             canhazImg.src = "media/textures/check-button.png";
           } else if ('getVRDisplays' in navigator) {
-            canhazElement.innerText = "Your browser does not support WebXR, but does support the deprecated WebVR API. You may be able to run Virtual Reality experiences on sites that use the WebXR Polyfill, like this one!"
+            canhazElement.innerText = "Your browser does not support required API, but does support the deprecated WebVR API. You may be able to run Virtual Reality experiences using a Polyfill, like this one!"
             canhazImg.src = "media/textures/info-button.png";
           } else if (isMobile(window)) {
-            canhazElement.innerText = "Your browser does not support WebXR, but you appear to be using a mobile device. You may be able to run Virtual Reality experiences on sites that use the WebXR Polyfill, like this one!"
+            canhazElement.innerText = "Your browser does not support required API, but you appear to be using a mobile device. You may be able to run Virtual Reality experiences using a Polyfill, like this one!"
             canhazImg.src = "media/textures/info-button.png";
           } else {
-            canhazElement.innerText = "Sorry, your browser does not support WebXR."
+            canhazElement.innerText = "Sorry, your browser does not support the required APIs to run AR."
             canhazImg.src = "media/textures/x-button.png";
           }
         </script>
@@ -136,9 +135,9 @@
         <script>
           let pages = [
 
-            { title: 'Pfizer virtual greeting', category: 'ATC',
+            { title: 'Pfizer Oncology AR Greeting', category: 'ATC',
               path: 'pfizer.html',
-              description: 'Some description' ,
+              description: 'Greeting for Pfizer Oncology' ,
               noPolyfill: true},
       
           ];
